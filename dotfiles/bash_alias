@@ -1,5 +1,4 @@
 alias df='pydf'
-alias gs='git status'
 alias ll='ls -lhAG'
 alias ls='ls -G'
 alias mkdir='mkdir -pv'
@@ -7,11 +6,16 @@ alias ps='ps auxf'
 alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
 alias wget='wget -c'
 
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 
-mcd() { mkdir -p "$1"; cd "$1";}
+mcd() { mkdir -p '$1'; cd '$1';}
 
-alias svim="sudo vim"
+alias svim='sudo vim'
+
+#Git
+alias gs='git status'
+alias ga='git add'
+alias gcm='git commit -m'

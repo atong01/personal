@@ -15,7 +15,7 @@ while true; do
       ln -sFf $PWD/dotfiles/vimrc $HOME/.vimrc
       ln -sFf $PWD/dotfiles/gitconfig $HOME/.gitconfig
       ln -sFf $PWD/dotfiles/bash_alias $HOME/.bash_alias
-      LINE='. .bash_alias'
+      LINE='. ~/.bash_alias'
       FILE=$HOME/.bashrc
       grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
       break;;
@@ -31,7 +31,7 @@ while true; do
   read -p "Do you want to continue [yn]? " yn
   case $yn in 
     [Yy]* )
-      LINE='. .bashrc'
+      LINE='. ~/.bashrc'
       FILE=$HOME/.bash_profile
       grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
       break;;
