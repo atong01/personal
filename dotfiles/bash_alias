@@ -1,3 +1,8 @@
+"DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+"liquid prompt
+[[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
+
 alias df='pydf'
 alias ll='ls -lhAG'
 alias ls='ls -G'
@@ -20,4 +25,5 @@ alias gs='git status'
 alias ga='git add'
 alias gcm='git commit -m'
 alias gp='git push'
+alias gdiff='git diff'
 
