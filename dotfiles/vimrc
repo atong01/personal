@@ -112,6 +112,8 @@ set lazyredraw
 set showmatch
 set incsearch
 set hlsearch
+"set belloff=all
+set visualbell
 nnoremap <leader><space> :nohlsearch<CR>
 
 set ruler
@@ -129,7 +131,7 @@ map <leader>tn :tabnext<cr>
 map <leader>tp :tabprevious<cr>
 
 
-set scrolloff=5 "keeps 5 lines above and below cursor
+set scrolloff=10 "keeps 5 lines above and below cursor
 set ai          "set auto indent
 set si          "set smart indent
 set nu          "set line numbers

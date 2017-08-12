@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+# Thanks to Mathias Bynens! https://mths.be/macos
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+# Reveal IP address, hostname, OS version, etc. when clicking the clock
+# in the login window
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+
+# Finder: show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
+
+# Show the ~/Library folder
+chflags nohidden $HOME/Library
+
+
+# Dark menu bar and dock
+defaults write $HOME/Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme -string "Dark"
+
+# Show only open applications in the Dock
+defaults write com.apple.dock static-only -bool true
+
+# Privacy: don’t send search queries to Apple
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+
+
+###############################################################################
+# Mail                                                                        #
+###############################################################################
+
+# Disable send and reply animations in Mail.app
+defaults write com.apple.mail DisableReplyAnimations -bool true
+defaults write com.apple.mail DisableSendAnimations -bool true
+
+# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+# Disable inline attachments (just show the icons)
+defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
+
+
+# Show 24 hours a day
+defaults write com.apple.ical "number of hours displayed" 24
+
+# Week should start on Monday
+defaults write com.apple.ical "first day of the week" 1
+
+# Day starts at 9AM
+defaults write com.apple.ical "first minute of work hours" 540
+
+###############################################################################
+# Kill affected applications                                                  #
+###############################################################################
+
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+    "Dock" "Finder" "Mail" "Messages" "Photos" "Safari" "SystemUIServer" \
+    "Terminal" "Tweetbot" "iCal"; do
+    killall "${app}" &> /dev/null
+done
+
+echo "Done. Note that some of these changes require a logout/restart to take effect."
+
