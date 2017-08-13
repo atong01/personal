@@ -40,3 +40,14 @@ while true; do
       ;;
   esac
 done
+
+
+# OS Specific Install
+
+#OS="(uname -s)"
+#if test "$OS" = "Darwin"; then
+#  
+#else if test "$OS" = "Linux"; then
+#
+#fi
+

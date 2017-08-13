@@ -227,3 +227,14 @@ nmap <C-n> :NERDTreeToggle<CR>
 
 "ycm: youcompleteme
 "let g:ycm_python_binary_path = 'python'
+"
+"
+
+" OS Specific Install
+
+if has("unix")
+  let s:uname = substitute(system("uname -s"), '\n', '', '')
+  if s:uname == "Darwin"
+    set backspace=2 
+  endif
+endif
