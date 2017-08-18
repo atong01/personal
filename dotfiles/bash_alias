@@ -1,4 +1,4 @@
-"DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 "liquid prompt
 [[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
