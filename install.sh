@@ -30,7 +30,12 @@ while true; do
   read -p "Do you want to continue [yn]? " yn
   case $yn in 
     [Yy]* )
+      ln -sFf $PWD/dotfiles/macos $HOME/.macos
+      ln -sFf $PWD/dotfiles/mac_alias $HOME/.mac_alias
       LINE='. ~/.bashrc'
+      FILE=$HOME/.bash_profile
+      grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+      LINE='. ~/.mac_alias'
       FILE=$HOME/.bash_profile
       grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
       break;;

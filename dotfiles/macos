@@ -17,10 +17,11 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 # Finder: show path bar
 defaults write com.apple.finder ShowPathbar -bool true
 
+# Finder: show all files
+# defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Show the ~/Library folder
 chflags nohidden $HOME/Library
-
 
 # Dark menu bar and dock
 defaults write $HOME/Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme -string "Dark"
