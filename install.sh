@@ -17,6 +17,9 @@ while true; do
       LINE='. ~/.bash_alias'
       FILE=$HOME/.bashrc
       grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+      LINE='# Keys added by personal script'
+      FILE=$HOME/.ssh/authorized_keys
+      grep -qF "$LINE" "$FILE" || cat $PWD/dotfiles/ssh/authorized_keys >> "$FILE"
       break;;
     [Nn]* )
       exit;;
