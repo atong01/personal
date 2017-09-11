@@ -25,16 +25,16 @@ call plug#begin('~/.vim/plugged')
 " Plug 'scrooloose/nerdtree'
 " Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
-Plug 'klen/python-mode'
+" Plug 'klen/python-mode'
 " Better autocompletion
 "Plug 'Shougo/neocomplete.vim'
 " Python and other languages code checker
 " Plug 'scrooloose/syntastic'
 
-Plug 'neovimhaskell/haskell-vim'
+" Plug 'neovimhaskell/haskell-vim'
 
-Plug 'w0rp/ale'
-Plug 'google/yapf'
+" Plug 'w0rp/ale'
+" Plug 'google/yapf'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
