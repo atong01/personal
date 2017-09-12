@@ -7,8 +7,6 @@ IdentityFile ~/.ssh/id_ed25519
 Host prodigy
 HostName 172.27.202.195
 User alex
-UseKeychain yes
-AddKeysToAgent yes
 IdentityFile ~/.ssh/id_ed25519
 
 Host tufts
