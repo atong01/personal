@@ -1,2 +1,4 @@
 backup/
 dotfiles/vim/
+dotfiles/ssh/
+!dotfiles/ssh/authorized_keys
