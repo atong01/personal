@@ -10,16 +10,14 @@ while true; do
   read -p "Do you want to continue [yn]? " yn
   case $yn in 
     [Yy]* )
-      ln -sFf $PWD/dotfiles/vim $HOME/.vim
-      ln -sFf $PWD/dotfiles/vimrc $HOME/.vimrc
-      ln -sFf $PWD/dotfiles/gitconfig $HOME/.gitconfig
-      ln -sFf $PWD/dotfiles/bash_alias $HOME/.bash_alias
+      for DOT_FILE in `ls $PWD/dotfiles`
+      do
+        cp -r $HOME/.$DOT_FILE $PWD/backup
+        ln -sFf $PWD/dotfiles/$DOT_FILE $HOME/.$DOT_FILE
+      done
       LINE='. ~/.bash_alias'
       FILE=$HOME/.bashrc
       grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
-      LINE='# Keys added by personal script'
-      FILE=$HOME/.ssh/authorized_keys
-      grep -qF "$LINE" "$FILE" || cat $PWD/dotfiles/ssh/authorized_keys >> "$FILE"
       break;;
     [Nn]* )
       exit;;
