@@ -12,7 +12,7 @@ while true; do
     [Yy]* )
       for DOT_FILE in `ls $PWD/dotfiles`
       do
-        cp -r $HOME/.$DOT_FILE $PWD/backup
+        mv $HOME/.$DOT_FILE $PWD/backup
         ln -sFf $PWD/dotfiles/$DOT_FILE $HOME/.$DOT_FILE
       done
       LINE='. ~/.bash_alias'
