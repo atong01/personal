@@ -1,0 +1,18 @@
+Host *.zoo
+HostName %h.cs.yale.edu
+User ayt6
+ForwardX11 yes
+IdentityFile ~/.ssh/id_ed25519
+
+Host prodigy
+HostName 172.27.202.195
+User alex
+IdentityFile ~/.ssh/id_ed25519
+
+Host tufts
+HostName homework.cs.tufts.edu
+User atong01
+
+Host cluster
+HostName login.cluster.tufts.edu
+User atong01

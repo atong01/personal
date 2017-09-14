@@ -123,7 +123,7 @@ imap jj <esc>
 imap jk <esc>
 imap kk <esc>
 
-set makeprg=./compile
+"set makeprg=./compile
 
 syntax on
 
@@ -164,6 +164,9 @@ augroup configgroup
     autocmd FileType ruby setlocal softtabstop=2
     autocmd FileType ruby setlocal commentstring=#\ %s
     autocmd FileType python setlocal commentstring=#\ %s
+    autocmd FileType cpp setlocal tabstop=2
+    autocmd FileType cpp setlocal shiftwidth=2
+    autocmd FileType cpp setlocal softtabstop=2
 "    autocmd FileType python setlocal shiftwidth=2
 "    autocmd FileType python setlocal tabstop=2
 "    autocmd FileType python setlocal softtabstop=2
