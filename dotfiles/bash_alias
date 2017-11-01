@@ -20,7 +20,7 @@ mcd() { mkdir -p '$1'; cd '$1';}
 
 alias svim='sudo vim'
 
-#Git
+# Git
 alias gs='git status'
 alias ga='git add'
 alias gaa='git add -a'
@@ -29,5 +29,8 @@ alias gca='git commit -a -m'
 alias gpush='git push'
 alias gdiff='git diff'
 
-#Sourcing
+# Sourcing
 alias src='source ~/.bashrc'
+
+# Yale specific
+alias zoo='ssh node.zoo'
