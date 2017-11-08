@@ -22,7 +22,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Better file browser
-" Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 " Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
 " Plug 'klen/python-mode'
@@ -32,6 +32,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'scrooloose/syntastic'
 
 " Plug 'neovimhaskell/haskell-vim'
+Plug 'edkolev/tmuxline.vim'
 
 " Plug 'w0rp/ale'
 " Plug 'google/yapf'
@@ -151,7 +152,8 @@ augroup configgroup
     autocmd VimEnter * highlight clear SignColumn
 "    autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md
 "                \:call <SID>StripTrailingWhitespaces()
-"    autocmd FileType java setlocal noexpandtab
+    autocmd FileType java setlocal tabstop=8
+    autocmd FileType java setlocal shiftwidth=2
 "    autocmd FileType java setlocal list
 "    autocmd FileType java setlocal listchars=tab:+\ ,eol:-
 "    autocmd FileType java setlocal formatprg=par\ -w80\ -T4
@@ -179,9 +181,9 @@ augroup configgroup
 augroup END
 
 "Nerdtree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-nmap <C-n> :NERDTreeToggle<CR>
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"nmap <C-n> :NERDTreeToggle<CR>
 
 "ycm: youcompleteme
 "let g:ycm_python_binary_path = 'python'
