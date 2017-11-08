@@ -14,7 +14,7 @@ endif
 
 " manually load vim-plug the first time
 if vim_plug_just_installed
-    :execute 'source '.fnameescape(vim_plug_path)
+  :execute 'source '.fnameescape(vim_plug_path)
 endif
 
 " ============================================================================
@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
 " Better autocompletion
 "Plug 'Shougo/neocomplete.vim'
 " Python and other languages code checker
-" Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " Plug 'neovimhaskell/haskell-vim'
 Plug 'edkolev/tmuxline.vim'
@@ -198,3 +198,15 @@ if has("unix")
     set backspace=2 
   endif
 endif
+
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['pylint']
