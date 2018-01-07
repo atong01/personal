@@ -2,6 +2,7 @@
 
 " Vim-plug initialization
 
+command! Reloadplug :!rm ~/.vim/autoload/plug.vim
 let vim_plug_just_installed = 0
 let vim_plug_path = expand('~/.vim/autoload/plug.vim')
 if !filereadable(vim_plug_path)
@@ -26,16 +27,26 @@ call plug#begin('~/.vim/plugged')
 " Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
 " Plug 'klen/python-mode'
-" Better autocompletion
-"Plug 'Shougo/neocomplete.vim'
-" Python and other languages code checker
-Plug 'scrooloose/syntastic'
 
 " Plug 'neovimhaskell/haskell-vim'
 Plug 'edkolev/tmuxline.vim'
 
-" Plug 'w0rp/ale'
+" Sublime Text like multiple selection.
+Plug 'terryma/vim-multiple-cursors'
+
+" Asynchronous linter engine
+Plug 'w0rp/ale'
+
+" Asynchronous completion for vim8
+Plug 'maralla/completor.vim'
 " Plug 'google/yapf'
+"
+
+" Statusline
+Plug 'vim-airline/vim-airline'
+
+" Fuzzy file finding
+Plug 'junegunn/fzf'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
@@ -46,7 +57,9 @@ if vim_plug_just_installed
 endif
 " ============================================================================
 "
-autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
+"autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
+ 
+"
 
 
 syntax enable
@@ -63,7 +76,10 @@ set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 
-set wildmenu
+set wildmenu        " Improved command completions
+set showcmd         " Show vim command completions
+set laststatus=2    " Display status in single window
+set cmdheight=2     " Set command window height to 2
 set lazyredraw
 set showmatch
 set incsearch
@@ -71,6 +87,8 @@ set hlsearch
 "set belloff=all
 set visualbell
 nnoremap <leader><space> :nohlsearch<CR>
+
+vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
 set ruler
 set cursorline
@@ -85,6 +103,13 @@ map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 map <leader>tn :tabnext<cr>
 map <leader>tp :tabprevious<cr>
+
+" Window movement
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 
 
 set scrolloff=10 "keeps 5 lines above and below cursor
@@ -121,31 +146,18 @@ endfunction
 map <leader>k :call Komment()<CR>
 
 imap jj <esc>
-imap jk <esc>
-imap kk <esc>
 
 "set makeprg=./compile
 
 syntax on
 
-" Processing
-"au BufRead,BufNewFile *.pde setf processing
-" 
-" hardcore hax
-":command! P :! processing-java --sketch=$PWD/ --output=temp --run --force
-":command! PP :! processing-java --sketch=$PWD/ --output=temp --force --run
-"autocmd BufNewFile,BufRead *.pde set makeprg=mkdir\ -p\ ./output\ &&\ processing-java\ --sketch=\"`pwd`\"\ --output=\"`pwd`\"/output\ --run\ --force
-"
-
 "Compile HAX
 nnoremap <Tab> :w<bar>:make<bar><CR>
 nnoremap ` :w<bar>:!wvrun python %<CR>
 
+" quick vimrc navigation
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-
-"call "pathogen#infect()
-"call pathogen#runtime_append_all_bundles()
 
 augroup configgroup
     autocmd!
@@ -169,6 +181,8 @@ augroup configgroup
     autocmd FileType cpp setlocal tabstop=2
     autocmd FileType cpp setlocal shiftwidth=2
     autocmd FileType cpp setlocal softtabstop=2
+    " sets auto line wrapping for text files
+    autocmd FileType txt setlocal textwidth=79
 "    autocmd FileType python setlocal shiftwidth=2
 "    autocmd FileType python setlocal tabstop=2
 "    autocmd FileType python setlocal softtabstop=2
@@ -195,18 +209,47 @@ augroup END
 if has("unix")
   let s:uname = substitute(system("uname -s"), '\n', '', '')
   if s:uname == "Darwin"
-    set backspace=2 
+    set backspace=2
   endif
 endif
 
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" maralla/completor
+" Use tab completion
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['pylint']
+
+" ==================================
+" BEGIN
+" From https://github.com/amix/vimrc
+" ==================================
+
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+" ==================================
+" END
+" From https://github.com/amix/vimrc
+" ==================================
