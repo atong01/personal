@@ -14,6 +14,9 @@ brew 'findutils'
 # Install Bash 4
 brew 'bash'
 
+# Install homebrew completions
+brew 'bash-completion'
+
 # Install more recent versions of some macOS tools
 brew 'homebrew/dupes/grep'
 
@@ -45,4 +48,7 @@ cask 'qlcolorcode'
 cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'quicklook-csv'
+
+# Latex
+cask 'mactex'
 
