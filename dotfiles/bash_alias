@@ -1,6 +1,7 @@
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+# ~/.bash_alias
+#DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-"liquid prompt
+#liquid prompt
 [[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
 
 alias df='pydf'
@@ -18,11 +19,15 @@ alias .....='cd ../../../..'
 
 mcd() { mkdir -p '$1'; cd '$1';}
 
+# Python
+alias python='python3'
+
 alias svim='sudo vim'
 
 # Git
 alias gs='git status'
 alias ga='git add'
+alias gA='git add --all'
 alias gaa='git add -a'
 alias gcm='git commit -m'
 alias gca='git commit -a -m'
