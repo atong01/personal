@@ -28,8 +28,12 @@ call plug#begin('~/.vim/plugged')
 " operators, highlighting, run and ipdb breakpoints)
 " Plug 'klen/python-mode'
 
-" Plug 'neovimhaskell/haskell-vim'
+" Language Specific
+Plug 'neovimhaskell/haskell-vim'
+Plug 'rust-lang/rust.vim'
+
 Plug 'edkolev/tmuxline.vim'
+Plug 'tpope/vim-fugitive'
 
 " Sublime Text like multiple selection.
 Plug 'terryma/vim-multiple-cursors'
@@ -58,7 +62,6 @@ endif
 " ============================================================================
 "
 "autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
- 
 "
 
 
@@ -205,7 +208,6 @@ augroup END
 "
 
 " OS Specific Install
-
 if has("unix")
   let s:uname = substitute(system("uname -s"), '\n', '', '')
   if s:uname == "Darwin"
@@ -219,7 +221,7 @@ endif
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
+let g:completor_racer_binary = '~/.cargo/bin/racer'
 
 " ==================================
 " BEGIN
