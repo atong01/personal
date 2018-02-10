@@ -1,12 +1,12 @@
-# ~/.bash_alias
-#DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+# DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-#liquid prompt
+# liquid prompt
 [[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
 
 alias df='pydf'
-alias ll='ls -lhAG --color=auto'
-alias ls='ls -G --color=auto'
+# ls: illegal option -- - caused by --color=auto no longer applicable to mac
+alias ll='ls -lhAFHG'
+alias ls='ls -FHG'
 alias mkdir='mkdir -pv'
 alias ps='ps auxf'
 alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
@@ -39,3 +39,10 @@ alias src='source ~/.bashrc'
 
 # Yale specific
 alias zoo='ssh node.zoo'
+
+# Python virtualenvwrapper
+source /usr/local/bin/virtualenvwrapper.sh
+
+# Brew Specific
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
