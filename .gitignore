@@ -3,4 +3,5 @@ dotfiles/vim/
 dotfiles/ssh/*
 !dotfiles/ssh/authorized_keys
 !dotfiles/ssh/config
+*.swp
 

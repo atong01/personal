@@ -1,7 +1,4 @@
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-
-"liquid prompt
-[[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 alias df='pydf'
 alias ll='ls -lhAG --color=auto'
@@ -34,3 +31,19 @@ alias src='source ~/.bashrc'
 
 # Yale specific
 alias zoo='ssh node.zoo'
+
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# liquid prompt
+source ~/personal/liquidprompt/liquidprompt
+
+# python3
+alias python=python3
+alias pip=pip3
+
+# virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
