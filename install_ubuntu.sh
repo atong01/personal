@@ -67,8 +67,12 @@ $INSTALL_CMD indicator-multiload
 #nvidia
 $INSTALL_CMD nvidia-modprobe
 
+#vim
 sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
 $INSTALL_CMD vim
+
+#latex
+sudo apt install texlive-latex-extra
 
 sudo apt -y autoremove
