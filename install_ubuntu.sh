@@ -25,18 +25,23 @@ set -euo pipefail
 
 
 SCRIPTNAME="$(basename $0)"
+INSTALL_CMD="sudo apt install -y"
 
 trap 'echo exiting, error @$LINENO && exit $?' ERR
 
-#ls /alsdkjfasldf 2>/dev/null
-#exit 15
-
 sudo apt update && sudo apt upgrade
 
-#sudo apt search nvidia-
-#echo "which nvidia driver do you want to install?"
+sudo add-apt-repository ppa:graphics-drivers
+sudo apt update
+sudo apt search nvidia-
+echo "which nvidia driver do you want to install?"
+read version_num
+$INSTALL_CMD nvidia-$version_num
 
-INSTALL_CMD="sudo apt install -y"
+
+
+
+
 
 $INSTALL_CMD build-essential
 $INSTALL_CMD cmake
@@ -44,6 +49,7 @@ $INSTALL_CMD ctags
 $INSTALL_CMD g++
 $INSTALL_CMD git
 $INSTALL_CMD libboost-all-dev
+$INSTALL_CMD linux-headers-generic
 $INSTALL_CMD lm-sensors
 $INSTALL_CMD psensor
 $INSTALL_CMD tmux
