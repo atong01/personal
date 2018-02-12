@@ -28,8 +28,12 @@ call plug#begin('~/.vim/plugged')
 " operators, highlighting, run and ipdb breakpoints)
 " Plug 'klen/python-mode'
 
-" Plug 'neovimhaskell/haskell-vim'
+" Language Specific
+Plug 'neovimhaskell/haskell-vim'
+Plug 'rust-lang/rust.vim'
+
 Plug 'edkolev/tmuxline.vim'
+Plug 'tpope/vim-fugitive'
 
 " Sublime Text like multiple selection.
 Plug 'terryma/vim-multiple-cursors'
@@ -48,6 +52,9 @@ Plug 'vim-airline/vim-airline'
 " Fuzzy file finding
 Plug 'junegunn/fzf'
 
+" Latex
+Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex'}
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
@@ -56,11 +63,6 @@ if vim_plug_just_installed
     :PlugInstall
 endif
 " ============================================================================
-"
-"autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
- 
-"
-
 
 syntax enable
 set background=dark
@@ -110,8 +112,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-
-
 set scrolloff=10 "keeps 5 lines above and below cursor
 set ai          "set auto indent
 set si          "set smart indent
@@ -159,6 +159,10 @@ nnoremap ` :w<bar>:!wvrun python %<CR>
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" ale configuration
+let g:lint_on_text_changed='never'
+let g:lint_on_insert_leave=1
+
 augroup configgroup
     autocmd!
     autocmd VimEnter * highlight clear SignColumn
@@ -194,32 +198,28 @@ augroup configgroup
     autocmd BufEnter *.sh setlocal softtabstop=2
 augroup END
 
-"Nerdtree
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"nmap <C-n> :NERDTreeToggle<CR>
-
-"ycm: youcompleteme
-"let g:ycm_python_binary_path = 'python'
-"
-"
 
 " OS Specific Install
-
-if has("unix")
-  let s:uname = substitute(system("uname -s"), '\n', '', '')
-  if s:uname == "Darwin"
-    set backspace=2
+if !exists("g:os")
+  if has("win64") || has("win32") || has("win16")
+    let g:os = "Windows"
+  else
+    let g:os = substitute(system('uname'), '\n', '', '')
   endif
 endif
 
+if g:os == "Darwin"
+  set backspace=2
+  let g:livepreview_previewer = 'open -a Preview'
+
+endif
 
 " maralla/completor
 " Use tab completion
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
+let g:completor_racer_binary = '~/.cargo/bin/racer'
 
 " ==================================
 " BEGIN

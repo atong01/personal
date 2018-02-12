@@ -1,9 +1,13 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# liquid prompt
+[[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
+
 alias df='pydf'
-alias ll='ls -lhAG --color=auto'
-alias ls='ls -G --color=auto'
+# ls: illegal option -- - caused by --color=auto no longer applicable to mac
+alias ll='ls -lhAFHG'
+alias ls='ls -FHG'
 alias mkdir='mkdir -pv'
 alias ps='ps auxf'
 alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
@@ -16,11 +20,15 @@ alias .....='cd ../../../..'
 
 mcd() { mkdir -p '$1'; cd '$1';}
 
+# Python
+alias python='python3'
+
 alias svim='sudo vim'
 
 # Git
 alias gs='git status'
 alias ga='git add'
+alias gA='git add --all'
 alias gaa='git add -a'
 alias gcm='git commit -m'
 alias gca='git commit -a -m'
@@ -56,6 +64,9 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias clip='xsel -b'
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias clip='pbcopy'
+  # Brew Specific completion
+  [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 else
   echo "Error, Undetected OS, cannot alias clip program"
 fi
+
