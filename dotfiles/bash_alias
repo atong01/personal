@@ -1,3 +1,4 @@
+#!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 alias df='pydf'
@@ -47,3 +48,14 @@ alias pip=pip3
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
+
+###
+# OS Specific
+###
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  alias clip='xsel -b'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  alias clip='pbcopy'
+else
+  echo "Error, Undetected OS, cannot alias clip program"
+fi
