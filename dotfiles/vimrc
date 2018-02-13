@@ -153,7 +153,7 @@ syntax on
 
 "Compile HAX
 nnoremap <Tab> :w<bar>:make<bar><CR>
-nnoremap ` :w<bar>:!wvrun python %<CR>
+nnoremap ` :w<bar>:!python %<CR>
 
 " quick vimrc navigation
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
