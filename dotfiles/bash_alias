@@ -37,6 +37,7 @@ alias src='source ~/.bashrc'
 alias zoo='ssh node.zoo'
 
 # Python virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
 # Brew Specific
