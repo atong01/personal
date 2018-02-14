@@ -28,8 +28,12 @@ call plug#begin('~/.vim/plugged')
 " operators, highlighting, run and ipdb breakpoints)
 " Plug 'klen/python-mode'
 
-" Plug 'neovimhaskell/haskell-vim'
+" Language Specific
+Plug 'neovimhaskell/haskell-vim'
+Plug 'rust-lang/rust.vim'
+
 Plug 'edkolev/tmuxline.vim'
+Plug 'tpope/vim-fugitive'
 
 " Sublime Text like multiple selection.
 Plug 'terryma/vim-multiple-cursors'
@@ -149,7 +153,7 @@ syntax on
 
 "Compile HAX
 nnoremap <Tab> :w<bar>:make<bar><CR>
-nnoremap ` :w<bar>:!wvrun python %<CR>
+nnoremap ` :w<bar>:!python %<CR>
 
 " quick vimrc navigation
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
@@ -196,7 +200,6 @@ augroup END
 
 
 " OS Specific Install
-"
 if !exists("g:os")
   if has("win64") || has("win32") || has("win16")
     let g:os = "Windows"
@@ -216,7 +219,7 @@ endif
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
+let g:completor_racer_binary = '~/.cargo/bin/racer'
 
 " ==================================
 " BEGIN

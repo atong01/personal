@@ -1,4 +1,5 @@
-# DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # liquid prompt
 [[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
@@ -19,11 +20,15 @@ alias .....='cd ../../../..'
 
 mcd() { mkdir -p '$1'; cd '$1';}
 
+# Python
+alias python='python3'
+
 alias svim='sudo vim'
 
 # Git
 alias gs='git status'
 alias ga='git add'
+alias gA='git add --all'
 alias gaa='git add -a'
 alias gcm='git commit -m'
 alias gca='git commit -a -m'
@@ -36,10 +41,32 @@ alias src='source ~/.bashrc'
 # Yale specific
 alias zoo='ssh node.zoo'
 
-# Python virtualenvwrapper
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# liquid prompt
+source ~/personal/liquidprompt/liquidprompt
+
+# python3
+alias python=python3
+alias pip=pip3
+
+# virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
 
-# Brew Specific
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+###
+# OS Specific
+###
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  alias clip='xsel -b'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  alias clip='pbcopy'
+  # Brew Specific completion
+  [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+else
+  echo "Error, Undetected OS, cannot alias clip program"
+fi
 
