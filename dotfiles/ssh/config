@@ -22,3 +22,9 @@ User git
 Hostname github.com
 PreferredAuthentications publickey
 IdentityFile ~/.ssh/github_ed25519
+
+Host orkney
+HostName 172.23.213.49
+User atong
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/orkney
