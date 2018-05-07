@@ -39,15 +39,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
 
 " Asynchronous linter engine
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Asynchronous completion for vim8
-Plug 'maralla/completor.vim'
+" Plug 'maralla/completor.vim'
 " Plug 'google/yapf'
 "
 
 " Statusline
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 
 " Fuzzy file finding
 Plug 'junegunn/fzf'
@@ -186,7 +186,10 @@ augroup configgroup
     autocmd FileType cpp setlocal shiftwidth=2
     autocmd FileType cpp setlocal softtabstop=2
     " sets auto line wrapping for text files
-    autocmd FileType txt setlocal textwidth=79
+    autocmd FileType txt setlocal textwidth=78
+    autocmd FileType tex setlocal textwidth=78
+    autocmd FileType tex setlocal nocursorline
+    autocmd FileType tex setlocal spell
 "    autocmd FileType python setlocal shiftwidth=2
 "    autocmd FileType python setlocal tabstop=2
 "    autocmd FileType python setlocal softtabstop=2
