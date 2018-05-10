@@ -27,6 +27,8 @@ Host orkney
 HostName 172.23.213.49
 User atong
 PreferredAuthentications publickey
-LocalForward 9001 localhost:9001 # Jupyter Notebook Port
-LocalForward 9002 localhost:9002 # Tensorboard Port
+# Jupyter Notebook Port
+LocalForward 9001 localhost:9001 
+# Tensorboard Port
+LocalForward 9002 localhost:9002 
 IdentityFile ~/.ssh/orkney
