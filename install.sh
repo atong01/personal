@@ -18,6 +18,7 @@ while true; do
       LINE='. ~/.bash_alias'
       FILE=$HOME/.bashrc
       grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+      ln -sFf $PWD/bin $HOME/bin
       break;;
     [Nn]* )
       exit;;
