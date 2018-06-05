@@ -70,16 +70,14 @@ else
   echo "Error, Undetected OS, cannot alias clip program"
 fi
 
-pathadd() {
+pathaddback() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="${PATH:+"$PATH:"}$1"
     fi
 }
 
 pathaddfront() {
-    echo "Attempt adding $1"
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        echo "adding $1"
         PATH="$1${PATH:+":$PATH"}"
     fi
 }
