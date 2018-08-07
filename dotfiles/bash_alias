@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # liquid prompt
 [[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
@@ -44,9 +44,6 @@ alias zoo='ssh node.zoo'
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
-
-# liquid prompt
-source ~/personal/liquidprompt/liquidprompt
 
 # python3
 alias python=python3

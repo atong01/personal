@@ -35,3 +35,24 @@ Host orkney
     # Equivalent to -Y (Security concerns)
     ForwardX11 yes
     ForwardX11Trusted yes 
+
+
+Host farnam
+    Hostname farnam.hpc.yale.edu
+    User ayt6
+
+Host oban
+    HostName 172.23.237.14
+    User atong
+    PreferredAuthentications publickey
+    LocalForward 9001 localhost:9001 
+    # Tensorboard Port
+    LocalForward 9002 localhost:9002 
+    IdentityFile ~/.ssh/oban
+    # Equivalent to -Y (Security concerns)
+    ForwardX11 yes
+    ForwardX11Trusted yes 
+    ForwardAgent yes
+
+Host *
+    UseKeychain yes
