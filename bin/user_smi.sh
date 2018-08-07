@@ -1,3 +1,4 @@
+#!/bin/bash
 export SMI=$(nvidia-smi)
 head -n 15 <(echo "$SMI")
 i=16
