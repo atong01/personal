@@ -39,7 +39,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
 
 " Asynchronous linter engine
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " Asynchronous completion for vim8
 " Plug 'maralla/completor.vim'
@@ -47,7 +47,7 @@ Plug 'terryma/vim-multiple-cursors'
 "
 
 " Statusline
-" Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 
 " Fuzzy file finding
 Plug 'junegunn/fzf'
@@ -84,6 +84,7 @@ set laststatus=2    " Display status in single window
 set cmdheight=2     " Set command window height to 2
 set lazyredraw
 set showmatch
+set matchtime=3
 set incsearch
 set hlsearch
 "set belloff=all
@@ -160,8 +161,12 @@ nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " ale configuration
-let g:lint_on_text_changed='never'
+" let g:lint_on_text_changed='never'
 let g:lint_on_insert_leave=1
+let g:ale_set_highlights=0
+let g:airline#extensions#ale#enabled=1
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 augroup configgroup
     autocmd!
