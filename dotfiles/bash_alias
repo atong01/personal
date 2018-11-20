@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # liquid prompt
 [[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
@@ -45,9 +45,6 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# liquid prompt
-source ~/personal/liquidprompt/liquidprompt
-
 # python3
 alias python=python3
 alias pip=pip3
@@ -55,7 +52,7 @@ alias pip=pip3
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-source /home/atong/.local/bin/virtualenvwrapper.sh
+source $HOME/.local/bin/virtualenvwrapper.sh
 
 ###
 # OS Specific
@@ -107,6 +104,13 @@ function ka(){
     echo "Running search again:"
     p "$1"
     echo -e "\n"
+}
+
+push() {
+  curl -s -F "token=ah85tu9i344rww2q2ph3ao9bo8x6vy" \
+  -F "user=u2qt4h4xadsi8bkxtsoqyxeyrf3t2r" \
+  -F "title=Finished!" \
+  -F "message=$1" https://api.pushover.net/1/messages.json > /dev/null 2>&1
 }
 
 pathaddfront $HOME/bin/
