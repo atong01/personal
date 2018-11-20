@@ -55,7 +55,7 @@ alias pip=pip3
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
+source /home/atong/.local/bin/virtualenvwrapper.sh
 
 ###
 # OS Specific
@@ -110,3 +110,4 @@ function ka(){
 }
 
 pathaddfront $HOME/bin/
+pathaddfront $HOME/.local/bin/
