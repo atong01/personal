@@ -42,8 +42,11 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
 
 " Asynchronous completion for vim8
-" Plug 'maralla/completor.vim'
+Plug 'maralla/completor.vim'
 " Plug 'google/yapf'
+"
+" Interactive python
+Plug 'metakirby5/codi.vim'
 "
 
 " Statusline
@@ -81,7 +84,7 @@ set softtabstop=2
 set wildmenu        " Improved command completions
 set showcmd         " Show vim command completions
 set laststatus=2    " Display status in single window
-set cmdheight=2     " Set command window height to 2
+"set cmdheight=2     " Set command window height to 2
 set lazyredraw
 set showmatch
 set matchtime=3
@@ -198,6 +201,9 @@ augroup configgroup
 "    autocmd FileType python setlocal shiftwidth=2
 "    autocmd FileType python setlocal tabstop=2
 "    autocmd FileType python setlocal softtabstop=2
+"
+    autocmd FileType python let &makeprg='python %'
+"   autocmd FileType python let &makeprg='pylint %\|sed "s/^\(\w*\):\s*\([0-9]\+\)/%:\2:\ \1:\ /g"'
     autocmd BufEnter *.cls setlocal filetype=java
     autocmd BufEnter *.zsh-theme setlocal filetype=zsh
     autocmd BufEnter Makefile setlocal noexpandtab
