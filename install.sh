@@ -50,6 +50,7 @@ while true; do
   esac
 done
 
+pip install --user -r requirements.txt
 
 # OS Specific Install
 
