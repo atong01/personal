@@ -18,6 +18,7 @@ while true; do
       LINE='. ~/.bash_alias'
       FILE=$HOME/.bashrc
       grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+      ln -sFf $PWD/bin $HOME/bin
       break;;
     [Nn]* )
       exit;;
@@ -40,6 +41,7 @@ while true; do
       LINE='. ~/.mac_alias'
       FILE=$HOME/.bash_profile
       grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+      echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
       break;;
     [Nn]* )
       exit;;
@@ -48,6 +50,7 @@ while true; do
   esac
 done
 
+pip install --user -r requirements.txt
 
 # OS Specific Install
 

@@ -39,21 +39,28 @@ Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
 
 " Asynchronous linter engine
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " Asynchronous completion for vim8
-" Plug 'maralla/completor.vim'
+Plug 'maralla/completor.vim'
 " Plug 'google/yapf'
+"
+" Interactive python
+Plug 'metakirby5/codi.vim'
 "
 
 " Statusline
-" Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 
 " Fuzzy file finding
 Plug 'junegunn/fzf'
 
 " Latex
 Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex'}
+
+" Markdown
+Plug 'JamshedVesuna/vim-markdown-preview'
+
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
@@ -81,9 +88,10 @@ set softtabstop=2
 set wildmenu        " Improved command completions
 set showcmd         " Show vim command completions
 set laststatus=2    " Display status in single window
-set cmdheight=2     " Set command window height to 2
+"set cmdheight=2     " Set command window height to 2
 set lazyredraw
 set showmatch
+set matchtime=3
 set incsearch
 set hlsearch
 "set belloff=all
@@ -160,8 +168,12 @@ nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " ale configuration
-let g:lint_on_text_changed='never'
+" let g:lint_on_text_changed='never'
 let g:lint_on_insert_leave=1
+let g:ale_set_highlights=0
+let g:airline#extensions#ale#enabled=1
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 augroup configgroup
     autocmd!
@@ -188,11 +200,15 @@ augroup configgroup
     " sets auto line wrapping for text files
     autocmd FileType txt setlocal textwidth=78
     autocmd FileType tex setlocal textwidth=78
+    autocmd FileType md  setlocal textwidth=78
     autocmd FileType tex setlocal nocursorline
     autocmd FileType tex setlocal spell
 "    autocmd FileType python setlocal shiftwidth=2
 "    autocmd FileType python setlocal tabstop=2
 "    autocmd FileType python setlocal softtabstop=2
+"
+    autocmd FileType python let &makeprg='python %'
+"   autocmd FileType python let &makeprg='pylint %\|sed "s/^\(\w*\):\s*\([0-9]\+\)/%:\2:\ \1:\ /g"'
     autocmd BufEnter *.cls setlocal filetype=java
     autocmd BufEnter *.zsh-theme setlocal filetype=zsh
     autocmd BufEnter Makefile setlocal noexpandtab
@@ -223,6 +239,10 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 let g:completor_racer_binary = '~/.cargo/bin/racer'
+
+" markdown preview
+let vim_markdown_preview_toggle=1
+let vim_markdown_preview_github=1
 
 " ==================================
 " BEGIN

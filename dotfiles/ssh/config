@@ -1,30 +1,58 @@
 Host *.zoo
-HostName %h.cs.yale.edu
-User ayt6
-ForwardX11 yes
-IdentityFile ~/.ssh/id_ed25519
+    HostName %h.cs.yale.edu
+    User ayt6
+    ForwardX11 yes
+    IdentityFile ~/.ssh/id_ed25519
 
 Host prodigy
-HostName 172.27.202.195
-User alex
-IdentityFile ~/.ssh/id_ed25519
+    HostName 172.27.202.135
+    User alex
+    IdentityFile ~/.ssh/id_ed25519
 
 Host tufts
-HostName homework.cs.tufts.edu
-User atong01
+    HostName homework.cs.tufts.edu
+    User atong01
 
 Host cluster
-HostName login.cluster.tufts.edu
-User atong01
+    HostName login.cluster.tufts.edu
+    User atong01
 
 Host github.com
-User git
-Hostname github.com
-PreferredAuthentications publickey
-IdentityFile ~/.ssh/github_ed25519
+    User git
+    Hostname github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/github_ed25519
 
 Host orkney
-HostName 172.23.213.49
-User atong
-PreferredAuthentications publickey
-IdentityFile ~/.ssh/orkney
+    HostName 172.23.213.49
+    User atong
+    PreferredAuthentications publickey
+    # Jupyter Notebook Port
+    LocalForward 9001 localhost:9001 
+    # Tensorboard Port
+    LocalForward 9002 localhost:9002 
+    IdentityFile ~/.ssh/orkney
+    # Equivalent to -Y (Security concerns)
+    ForwardX11 yes
+    ForwardX11Trusted yes 
+
+
+Host farnam
+    Hostname farnam.hpc.yale.edu
+    User ayt6
+
+Host oban
+    HostName 172.23.237.14
+    User atong
+    PreferredAuthentications publickey
+    LocalForward 9001 localhost:9001 
+    # Tensorboard Port
+    LocalForward 9002 localhost:9002 
+    IdentityFile ~/.ssh/oban
+    # Equivalent to -Y (Security concerns)
+    ForwardX11 yes
+    ForwardX11Trusted yes 
+    ForwardAgent yes
+
+Host *
+    UseKeychain yes
