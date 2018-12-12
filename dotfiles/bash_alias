@@ -4,7 +4,7 @@
 # liquid prompt
 [[ $- = *i* ]] && source $HOME/personal/liquidprompt/liquidprompt
 
-alias df='pydf'
+# alias df='pydf'
 # ls: illegal option -- - caused by --color=auto no longer applicable to mac
 alias ll='ls -lhAFHG'
 alias ls='ls -FHG'
