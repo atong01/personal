@@ -54,5 +54,5 @@ Host oban
     ForwardX11Trusted yes 
     ForwardAgent yes
 
-Host *
-    UseKeychain yes
+#Host *
+#    UseKeychain yes
