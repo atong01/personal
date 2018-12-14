@@ -41,6 +41,7 @@ while true; do
       LINE='. ~/.mac_alias'
       FILE=$HOME/.bash_profile
       grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+      echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
       break;;
     [Nn]* )
       exit;;
