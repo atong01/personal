@@ -60,6 +60,7 @@ $INSTALL_CMD xsel # Realistically don't need both of these...
 $INSTALL_CMD python-setuptools
 $INSTALL_CMD python-dev
 $INSTALL_CMD python-pip
+$INSTALL_CMD python3-tk
 
 #widgets
 $INSTALL_CMD indicator-multiload
