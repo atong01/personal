@@ -12,6 +12,7 @@ alias mkdir='mkdir -pv'
 alias ps='ps auxf'
 alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
 alias wget='wget -c'
+alias ddu='du -h -d 1 | sort -hr'
 
 alias ..='cd ..'
 alias ...='cd ../..'
