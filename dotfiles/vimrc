@@ -27,6 +27,8 @@ call plug#begin('~/.vim/plugged')
 " Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
 " Plug 'klen/python-mode'
+"
+Plug 'altercation/vim-colors-solarized'
 
 " Language Specific
 Plug 'neovimhaskell/haskell-vim'
@@ -76,6 +78,8 @@ endif
 
 syntax enable
 set background=dark
+" let g:solarized_termcolors=256
+colorscheme solarized
 "autocmd FileType python map <buffer> <C-G> :!python % <CR>
 
 filetype plugin on
