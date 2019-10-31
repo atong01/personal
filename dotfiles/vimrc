@@ -63,6 +63,8 @@ Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex'}
 " Markdown
 Plug 'JamshedVesuna/vim-markdown-preview'
 
+Plug 'burneyy/vim-snakemake'
+
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
@@ -238,6 +240,7 @@ if g:os == "Darwin"
 endif
 
 " maralla/completor
+let g:completor_python_binary = '/usr/bin/python3'
 " Use tab completion
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
