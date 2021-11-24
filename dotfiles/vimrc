@@ -1,5 +1,3 @@
-
-
 " Vim-plug initialization
 
 command! Reloadplug :!rm ~/.vim/autoload/plug.vim
@@ -23,10 +21,11 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Better file browser
-"Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+"
 " Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
-" Plug 'klen/python-mode'
+Plug 'klen/python-mode'
 
 " Language Specific
 Plug 'neovimhaskell/haskell-vim'
@@ -43,10 +42,10 @@ Plug 'w0rp/ale'
 
 " Asynchronous completion for vim8
 Plug 'maralla/completor.vim'
-" Plug 'google/yapf'
+Plug 'google/yapf'
 "
 " Interactive python
-Plug 'metakirby5/codi.vim'
+" Plug 'metakirby5/codi.vim'
 "
 
 " Statusline
@@ -60,6 +59,7 @@ Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex'}
 
 " Markdown
 Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 
 " Tell vim-plug we finished declaring plugins, so it can load them
@@ -70,6 +70,10 @@ if vim_plug_just_installed
     :PlugInstall
 endif
 " ============================================================================
+
+"Pymode options
+let g:pymode_options_max_line_length = 80
+let g:pymode_options_colorcolumn = 0
 
 syntax enable
 set background=dark
@@ -172,6 +176,9 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 let g:lint_on_insert_leave=1
 let g:ale_set_highlights=0
 let g:airline#extensions#ale#enabled=1
+let g:ale_linters = {
+\  'python': ['flake8']
+\}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
