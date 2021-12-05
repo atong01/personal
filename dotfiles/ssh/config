@@ -1,11 +1,39 @@
+Host mila
+    User alexander.tong
+    Hostname login.server.mila.quebec
+    PreferredAuthentications publickey,keyboard-interactive
+    #PreferredAuthentications keyboard-interactive
+    Port 2222
+    #ServerAliveInterval 120
+    #ServerAliveCountMax 5
+    IdentityFile ~/.ssh/mila_cluster_ed25519
+
+Host *.server.mila.quebec !*login.server.mila.quebec
+  HostName %h
+  User alexander.tong
+  ProxyJump mila
+
 Host *.zoo
     HostName %h.cs.yale.edu
     User ayt6
     ForwardX11 yes
     IdentityFile ~/.ssh/id_ed25519
 
+Host genius
+    HostName 172.28.228.14
+    User alex
+    IdentityFile ~/.ssh/id_ed25519
+    # Equivalent to -Y (Security concerns)
+    # Jupyter Notebook Port
+    LocalForward 9007 localhost:9008
+    # Tensorboard Port
+    LocalForward 9008 localhost:9008
+    ForwardX11 yes
+    ForwardX11Trusted yes 
+
 Host prodigy
-    HostName 172.27.202.135
+    HostName 192.168.254.28
+    #HostName 172.27.202.135
     User alex
     IdentityFile ~/.ssh/id_ed25519
 
@@ -31,25 +59,57 @@ Host orkney
     LocalForward 9001 localhost:9001 
     # Tensorboard Port
     LocalForward 9002 localhost:9002 
+    LocalForward 9009 localhost:9009
+    LocalForward 5005 localhost:5005
+    LocalForward 5006 localhost:5006
+    LocalForward 5007 localhost:5007
+    LocalForward 8787 localhost:8787
     IdentityFile ~/.ssh/orkney
     # Equivalent to -Y (Security concerns)
     ForwardX11 yes
     ForwardX11Trusted yes 
 
+Host galloway
+    #HostName 172.23.213.77
+    HostName 172.23.213.77
+    # HostName 172.23.237.229
+    # HostName 172.23.236.122
+    User atong
+    PreferredAuthentications publickey
+    # Jupyter Notebook Port
+    LocalForward 9005 localhost:9005
+    # cellbygene port
+    LocalForward 5005 localhost:5005
+    # Tensorboard Port
+    LocalForward 9006 localhost:9006
+    IdentityFile ~/.ssh/orkney
+    # Equivalent to -Y (Security concerns)
+    ForwardX11 yes
+    ForwardX11Trusted yes 
 
 Host farnam
     Hostname farnam.hpc.yale.edu
     User ayt6
 
+Host ruddle
+    Hostname ruddle.hpc.yale.edu
+    User ayt6
+
 Host oban
-    HostName 172.23.237.14
+    #HostName 172.23.237.14
+    #HostName 169.254.150.88
+    HostName 172.23.213.76
     User atong
     PreferredAuthentications publickey
-    LocalForward 9001 localhost:9001 
+    LocalForward 9003 localhost:9003 
     # Tensorboard Port
-    LocalForward 9002 localhost:9002 
-    IdentityFile ~/.ssh/oban
+    LocalForward 9004 localhost:9004 
+    #IdentityFile ~/.ssh/oban
     # Equivalent to -Y (Security concerns)
     ForwardX11 yes
     ForwardX11Trusted yes 
     ForwardAgent yes
+
+#Host *
+#    UseKeychain yes
+#    ServerAliveInterval 120
