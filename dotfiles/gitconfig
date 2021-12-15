@@ -1,9 +1,12 @@
 [user]
-	email = alexanderytong@gmail.com
-	name = Alex Tong
+  name = Alex Tong
+  email = alexandertongdev@gmail.com
+[init]
+  defaultBranch = main
+[core]
+	editor = vim
 [color]
   ui = auto
-
 [push]
   default = simple
 
@@ -28,13 +31,11 @@
 ###
   rb = rebase
   rbi = rebase --interactive
-
 ###
 
-[alias]
-  recent = !~/misc/recent-branches.sh
+[github]
+	user = atong01
+	token = token
 
-[core]
-	editor = vim
 [pull]
 	rebase = true

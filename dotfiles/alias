@@ -22,9 +22,7 @@ alias .....='cd ../../../..'
 mcd() { mkdir -p '$1'; cd '$1';}
 
 # Python
-alias python='python3'
-
-alias svim='sudo vim'
+# alias python='python3'
 
 # Git
 alias gs='git status'
@@ -36,21 +34,28 @@ alias gca='git commit -a -m'
 alias gpush='git push'
 alias gdiff='git diff'
 
-# Sourcing
-alias src='source ~/.bashrc'
+alias \
+s!='sudo !!' \
+copydir='pwd | tr -d '\n' | pbcopy' \
+src='source $ZDOTDIR/.zshrc' \
+hsi='history | grep -i'
 
-# Yale specific
-alias zoo='ssh node.zoo'
+copyfile(){
+[ -n "$1" ]\
+&& CPFILE="$@"\
+&& readlink -f "$CPFILE" | tr -d '\n' | pbcopy
+}
 
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
 # virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-#source $HOME/.local/bin/virtualenvwrapper.sh
-source $HOME/Library/Python/3.9/bin/virtualenvwrapper.sh                                     
+if [ -f $HOME/Library/Python/3.9/bin/virtualenvwrapper.sh ]; then
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/Devel
+    source $HOME/Library/Python/3.9/bin/virtualenvwrapper.sh                                     
+fi
 
 
 ###
@@ -62,15 +67,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias clip='pbcopy'
   # Brew Specific completion
   [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-  # Add all keyfiles on login
-  ssh-add -A
+  # Add keys
+  ssh-add -K
 else
   echo "Error, Undetected OS, cannot alias clip program"
 fi
-
-alias tensorboard='tensorboard --port 9002'
-
-export LD_LIBRARY_PATH=/opt/cuda/extras/CUPTI/lib64/
 
 pathaddback() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -107,14 +108,12 @@ function ka(){
     echo -e "\n"
 }
 
-push() {
-  curl -s -F "token=ah85tu9i344rww2q2ph3ao9bo8x6vy" \
-  -F "user=u2qt4h4xadsi8bkxtsoqyxeyrf3t2r" \
-  -F "title=Finished!" \
-  -F "message=$1" https://api.pushover.net/1/messages.json > /dev/null 2>&1
-}
-
-pathaddfront $HOME/bin/
+# pathaddfront $HOME/bin/
 pathaddfront $HOME/.local/bin/
 
-ssh-add -K
+# Rosetta
+alias brewr="arch -x86_64 /usr/local/bin/brew $@"
+alias leg="arch -x86_64 $@"
+
+# Enable vim in zsh
+bindkey -v ; export KEYTIMEOUT=1
