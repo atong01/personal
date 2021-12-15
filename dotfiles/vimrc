@@ -24,6 +24,8 @@ call plug#begin('~/.vim/plugged')
 " Plug 'scrooloose/nerdtree'
 "
 " Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
+Plug 'earthly/earthly.vim', { 'branch': 'main' }
 " Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
 Plug 'klen/python-mode'
@@ -80,9 +82,16 @@ let g:pymode_options_max_line_length = 80
 let g:pymode_options_colorcolumn = 0
 
 syntax enable
+
+" set background=light
+" set Vim-specific sequences for RGB colors
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
 set background=dark
+colorscheme solarized8
 " let g:solarized_termcolors=256
-colorscheme solarized
 "autocmd FileType python map <buffer> <C-G> :!python % <CR>
 
 filetype plugin on
@@ -97,7 +106,7 @@ set softtabstop=2
 
 set wildmenu        " Improved command completions
 set showcmd         " Show vim command completions
-set laststatus=2    " Display status in single window
+set laststatus=1    " Display status in single window
 "set cmdheight=2     " Set command window height to 2
 set lazyredraw
 set showmatch
@@ -167,8 +176,6 @@ imap jj <esc>
 
 "set makeprg=./compile
 
-syntax on
-
 "Compile HAX
 nnoremap <Tab> :w<bar>:make<bar><CR>
 nnoremap ` :w<bar>:!python3 %<CR>
@@ -216,10 +223,9 @@ augroup configgroup
     autocmd FileType md  setlocal textwidth=78
     autocmd FileType tex setlocal nocursorline
     autocmd FileType tex setlocal spell
-"    autocmd FileType python setlocal shiftwidth=2
-"    autocmd FileType python setlocal tabstop=2
-"    autocmd FileType python setlocal softtabstop=2
-"
+    autocmd FileType python setlocal shiftwidth=4
+    autocmd FileType python setlocal tabstop=4
+    autocmd FileType python setlocal softtabstop=4
     autocmd FileType python let &makeprg='python %'
 "   autocmd FileType python let &makeprg='pylint %\|sed "s/^\(\w*\):\s*\([0-9]\+\)/%:\2:\ \1:\ /g"'
     autocmd BufEnter *.cls setlocal filetype=java
