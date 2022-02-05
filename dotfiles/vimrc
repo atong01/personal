@@ -28,7 +28,8 @@ call plug#begin('~/.vim/plugged')
 " operators, highlighting, run and ipdb breakpoints)
 " Plug 'klen/python-mode'
 "
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 
 " Language Specific
 Plug 'neovimhaskell/haskell-vim'
@@ -79,8 +80,13 @@ endif
 syntax enable
 set background=dark
 " let g:solarized_termcolors=256
-colorscheme solarized
-"autocmd FileType python map <buffer> <C-G> :!python % <CR>
+" set Vim-specific sequences for RGB colors
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+colorscheme solarized8
+autocmd FileType python map <buffer> <C-G> :!python % <CR>
 
 filetype plugin on
 filetype indent on
@@ -181,6 +187,14 @@ let g:ale_set_highlights=0
 let g:airline#extensions#ale#enabled=1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+let g:ale_fixers = {
+\  '*': ['remove_trailing_lines', 'trim_whitespace'],
+\  'python': ['black'],
+\}
+let g:ale_linters = {
+\  'python' : ['pylint'],
+\}
 
 augroup configgroup
     autocmd!
