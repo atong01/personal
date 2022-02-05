@@ -22,9 +22,7 @@ alias .....='cd ../../../..'
 mcd() { mkdir -p '$1'; cd '$1';}
 
 # Python
-alias python='python3'
-
-alias svim='sudo vim'
+# alias python='python3'
 
 # Git
 alias gs='git status'
@@ -36,11 +34,17 @@ alias gca='git commit -a -m'
 alias gpush='git push'
 alias gdiff='git diff'
 
-# Sourcing
-alias src='source ~/.bashrc'
+alias \
+s!='sudo !!' \
+copydir='pwd | tr -d '\n' | pbcopy' \
+src='source $ZDOTDIR/.zshrc' \
+hsi='history | grep -i'
 
-# Yale specific
-alias zoo='ssh node.zoo'
+copyfile(){
+[ -n "$1" ]\
+&& CPFILE="$@"\
+&& readlink -f "$CPFILE" | tr -d '\n' | pbcopy
+}
 
 # Slurm
 format="\"%8i %8g %9u %5P %30j %2t %12M %12l %5D %3C %10R %10b\""
@@ -67,15 +71,12 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# python3
-alias python=python3
-alias pip=pip3
-
 # virtualenvwrapper
-# Uncomment for virtualenvwrapper
-#export WORKON_HOME=$HOME/.virtualenvs
-#export PROJECT_HOME=$HOME/Devel
-#source $HOME/.local/bin/virtualenvwrapper.sh
+if [ -f $HOME/Library/Python/3.9/bin/virtualenvwrapper.sh ]; then
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/Devel
+    source $HOME/Library/Python/3.9/bin/virtualenvwrapper.sh                                     
+fi
 
 ###
 # OS Specific
@@ -86,13 +87,13 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias clip='pbcopy'
   # Brew Specific completion
   [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+  # Add keys
+  ssh-add --apple-use-keychain
+  # -K deprecated in MacOS 12.0, replaced with --apple-use-keychain
+  # ssh-add -K
 else
   echo "Error, Undetected OS, cannot alias clip program"
 fi
-
-alias tensorboard='tensorboard --port 9002'
-
-export LD_LIBRARY_PATH=/opt/cuda/extras/CUPTI/lib64/
 
 pathaddback() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -129,12 +130,14 @@ function ka(){
     echo -e "\n"
 }
 
-push() {
-  curl -s -F "token=ah85tu9i344rww2q2ph3ao9bo8x6vy" \
-  -F "user=u2qt4h4xadsi8bkxtsoqyxeyrf3t2r" \
-  -F "title=Finished!" \
-  -F "message=$1" https://api.pushover.net/1/messages.json > /dev/null 2>&1
-}
-
-pathaddfront $HOME/bin/
+# pathaddfront $HOME/bin/
 pathaddfront $HOME/.local/bin/
+pathaddback /opt/homebrew/anaconda3/bin/
+pathaddfront $HOME/.bin/
+
+# Rosetta
+alias brewr="arch -x86_64 /usr/local/bin/brew $@"
+alias leg="arch -x86_64 $@"
+
+# Enable vim in zsh
+bindkey -v ; export KEYTIMEOUT=1

@@ -52,3 +52,5 @@ cask 'quicklook-csv'
 # Latex
 cask 'mactex'
 
+# Tkinter
+brew 'python-tk@3.9'

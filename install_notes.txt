@@ -1,0 +1,21 @@
+
+Installed homebrew from website
+
+Installed 1Password, Notability from appstore
+
+# Brew install
+brew install dropbox vim aldente google-chrome iterm2 alacritty spotify
+
+brew install R anaconda rectangle hammerspoon zinit
+
+# zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+git clone https://github.com/oldratlee/hacker-quotes.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/hacker-quotes
+
+# Terminal solarized install
+https://jakoblaegdsmand.com/en/blog/how-to-get-an-awesome-looking-terminal-on-mac-os-x/
+
+# Software from Yale
+
+Creative cloud, Microsoft Office 2019, Matlab
