@@ -1,3 +1,16 @@
+Host cedar
+    User atong01
+    Hostname cedar.computecanada.ca
+    PreferredAuthentications publickey,keyboard-interactive
+    IdentityFile ~/.ssh/mila_cluster_ed25519
+
+Host beluga
+    User atong01
+    Hostname beluga.computecanada.ca
+    PreferredAuthentications publickey,keyboard-interactive
+    IdentityFile ~/.ssh/mila_cluster_ed25519
+    
+
 Host mila
     User alexander.tong
     Hostname login.server.mila.quebec
@@ -12,6 +25,7 @@ Host *.server.mila.quebec !*login.server.mila.quebec
   HostName %h
   User alexander.tong
   ProxyJump mila
+  IdentityFile ~/.ssh/mila_cluster_ed25519
 
 Host *.zoo
     HostName %h.cs.yale.edu
@@ -54,7 +68,7 @@ Host github.com
 Host orkney
     HostName 172.23.213.49
     User atong
-    PreferredAuthentications publickey
+    PreferredAuthentications publickey,keyboard-interactive
     # Jupyter Notebook Port
     LocalForward 9001 localhost:9001 
     # Tensorboard Port
@@ -75,7 +89,8 @@ Host galloway
     # HostName 172.23.237.229
     # HostName 172.23.236.122
     User atong
-    PreferredAuthentications publickey
+    PreferredAuthentications password
+    #PreferredAuthentications publickey,keyboard-interactive
     # Jupyter Notebook Port
     LocalForward 9005 localhost:9005
     # cellbygene port
@@ -90,10 +105,12 @@ Host galloway
 Host farnam
     Hostname farnam.hpc.yale.edu
     User ayt6
+    PreferredAuthentications keyboard-interactive
 
 Host ruddle
     Hostname ruddle.hpc.yale.edu
     User ayt6
+    PreferredAuthentications password
 
 Host oban
     #HostName 172.23.237.14
