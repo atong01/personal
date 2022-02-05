@@ -68,7 +68,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   # Brew Specific completion
   [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
   # Add keys
-  ssh-add -K
+  ssh-add --apple-use-keychain
+  # -K deprecated in MacOS 12.0, replaced with --apple-use-keychain
+  # ssh-add -K
 else
   echo "Error, Undetected OS, cannot alias clip program"
 fi
@@ -110,6 +112,8 @@ function ka(){
 
 # pathaddfront $HOME/bin/
 pathaddfront $HOME/.local/bin/
+pathaddback /opt/homebrew/anaconda3/bin/
+pathaddfront $HOME/.bin/
 
 # Rosetta
 alias brewr="arch -x86_64 /usr/local/bin/brew $@"
