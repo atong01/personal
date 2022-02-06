@@ -91,6 +91,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   ssh-add --apple-use-keychain
   # -K deprecated in MacOS 12.0, replaced with --apple-use-keychain
   # ssh-add -K
+  # Rosetta
+  alias brewr="arch -x86_64 /usr/local/bin/brew $@"
+  alias leg="arch -x86_64 $@"
+
+  # Enable vim in zsh
+  bindkey -v ; export KEYTIMEOUT=1
 else
   echo "Error, Undetected OS, cannot alias clip program"
 fi
@@ -135,9 +141,3 @@ pathaddfront $HOME/.local/bin/
 pathaddback /opt/homebrew/anaconda3/bin/
 pathaddfront $HOME/.bin/
 
-# Rosetta
-alias brewr="arch -x86_64 /usr/local/bin/brew $@"
-alias leg="arch -x86_64 $@"
-
-# Enable vim in zsh
-bindkey -v ; export KEYTIMEOUT=1
