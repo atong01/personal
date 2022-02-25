@@ -127,6 +127,11 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
+autocmd FileType python map <leader>b :ALEFix<CR>
+autocmd FileType *.txt setlocal textwidth=88
+autocmd FileType *.md setlocal textwidth=88
+autocmd FileType *.rst setlocal textwidth=88
+
 set ruler
 set cursorline
 
@@ -197,19 +202,17 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 let g:lint_on_insert_leave=1
 let g:ale_set_highlights=0
 let g:airline#extensions#ale#enabled=1
-let g:ale_linters = {
-\  'python': ['flake8']
-\}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 let g:ale_fixers = {
 \  '*': ['remove_trailing_lines', 'trim_whitespace'],
-\  'python': ['black'],
+\  'python': ['black', 'isort'],
 \}
 let g:ale_linters = {
-\  'python' : ['pylint'],
+\  'python' : ['flake8'],
 \}
+"\  'python' : ['flake8', 'pylint'],
 
 augroup configgroup
     autocmd!
