@@ -47,7 +47,8 @@ copyfile(){
 }
 
 # Slurm
-format="\"%8i %8g %9u %5P %30j %2t %12M %12l %5D %3C %10R %10b\""
+# format="\"%8i %8g %9u %5P %30j %2t %12M %12l %5D %3C %10R %10b\""
+format="\"%10i %8g %9u %5P %10j %2t %12M %12l %5D %3C %10R %10b\""
 flags="-S +i -o ${format}"
 alias q="squeue -u $USER ${flags}"  # my jobs
 alias qa="squeue -p isi -a ${flags}" # Jobs in the parition I care
@@ -83,6 +84,7 @@ fi
 ###
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias clip='xsel -b'
+  #  export LD_PRELOAD=/lib/x86_64-linux-gnu/libnss_sss.so.2
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias clip='pbcopy'
   # Brew Specific completion
@@ -141,3 +143,5 @@ pathaddfront $HOME/.local/bin/
 pathaddback /opt/homebrew/anaconda3/bin/
 pathaddfront $HOME/.bin/
 
+alias quota='beegfs-ctl --cfgFile=/etc/beegfs/home.d/beegfs-client.conf --getquota --uid $USER'
+alias sa='salloc --gres=gpu:1 -c 4 --mem=10G -t 12:00:00 --partition=unkillable --exclude=rtx1,rtx3,rtx4,rtx5,rtx7,rtx8'
