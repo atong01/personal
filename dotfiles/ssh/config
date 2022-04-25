@@ -13,8 +13,8 @@ Host beluga
 Host narval
     User atong01
     Hostname narval.computecanada.ca
-    PreferredAuthentications keyboard-interactive
-    # IdentityFile ~/.ssh/mila_cluster_ed25519
+    PreferredAuthentications publickey,password
+    IdentityFile ~/.ssh/mila_cluster_ed25519
 
 Host mila
     User alexander.tong
@@ -22,6 +22,7 @@ Host mila
     PreferredAuthentications publickey,keyboard-interactive
     #PreferredAuthentications keyboard-interactive
     Port 2222
+    LocalForward 35795 localhost:35795
     #ServerAliveInterval 120
     #ServerAliveCountMax 5
     IdentityFile ~/.ssh/mila_cluster_ed25519
