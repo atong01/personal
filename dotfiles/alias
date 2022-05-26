@@ -34,6 +34,10 @@ alias gca='git commit -a -m'
 alias gpush='git push'
 alias gdiff='git diff'
 
+# Vim
+alias dswp='find . -type f -name "*.sw?" -delete'
+alias swp='find . -type f -name "*.sw?"'
+
 alias \
 s!='sudo !!' \
 copydir='pwd | tr -d '\n' | pbcopy' \
@@ -144,4 +148,5 @@ pathaddback /opt/homebrew/anaconda3/bin/
 pathaddfront $HOME/.bin/
 
 alias quota='beegfs-ctl --cfgFile=/etc/beegfs/home.d/beegfs-client.conf --getquota --uid $USER'
-alias sa='salloc --gres=gpu:1 -c 4 --mem=10G -t 12:00:00 --partition=unkillable --exclude=rtx1,rtx3,rtx4,rtx5,rtx7,rtx8'
+alias sa='salloc --gres=gpu:1 -c 2 --mem=16G -t 12:00:00 --partition=unkillable --exclude=rtx1,rtx3,rtx4,rtx5,rtx7,rtx8'
+alias sac='salloc -c 4 --mem=16G -t 12:00:00'
