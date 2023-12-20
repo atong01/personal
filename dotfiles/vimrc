@@ -68,6 +68,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " Snakemake
 Plug 'ivan-krukov/vim-snakemake'
 
+Plug 'github/copilot.vim'
+
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
