@@ -19,6 +19,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+alias killwandb="ps aux|grep wandb|grep -v grep | awk '{print $2}'|xargs kill -9"
+
 mcd() { mkdir -p '$1'; cd '$1';}
 
 # Python
@@ -35,7 +37,7 @@ alias gpush='git push'
 alias gdiff='git diff'
 
 # Vim
-alias dswp='find . -type f -name "*.sw?" -delete'
+alias rmswp='find . -type f -name "*.sw?" -delete'
 alias swp='find . -type f -name "*.sw?"'
 
 alias \
@@ -52,11 +54,14 @@ copyfile(){
 
 # Slurm
 # format="\"%8i %8g %9u %5P %30j %2t %12M %12l %5D %3C %10R %10b\""
-format="\"%10i %8g %9u %5P %10j %2t %12M %12l %5D %3C %10R %10b\""
+format="\"%16i %4u %10P %8j %2t %8M %8l %5D %3C %6m %16R %17b\""
 flags="-S +i -o ${format}"
 alias q="squeue -u $USER ${flags}"  # my jobs
-alias qa="squeue -p isi -a ${flags}" # Jobs in the parition I care
+alias qa="squeue -p long-cpu -a ${flags}" # Jobs in the parition I care
 alias qaa="squeue -a ${flags}" # Jobs from all paritions
+alias qlb="squeue -p lab-bengioy -a ${flags}" # Jobs from all paritions
+export DPATH=/network/scratch/a/alexander.tong/se3_diffusion/dem/
+alias cdd="cd $DPATH"
 ###############
 # SINFO aliases
 ###############
@@ -147,6 +152,113 @@ pathaddfront $HOME/.local/bin/
 pathaddback /opt/homebrew/anaconda3/bin/
 pathaddfront $HOME/.bin/
 
-alias quota='beegfs-ctl --cfgFile=/etc/beegfs/home.d/beegfs-client.conf --getquota --uid $USER'
-alias sa='salloc --gres=gpu:1 -c 2 --mem=16G -t 12:00:00 --partition=unkillable --exclude=rtx1,rtx3,rtx4,rtx5,rtx7,rtx8'
-alias sac='salloc -c 4 --mem=16G -t 12:00:00'
+alias quota=disk-quota
+#alias quota='beegfs-ctl --cfgFile=/etc/beegfs/home.d/beegfs-client.conf --getquota --uid $USER'
+alias sa='salloc --gres=gpu:1 -c 2 --mem=16G -t 12:00:00 --partition=unkillable'
+alias sac='salloc -c 4 --mem=16G -t 12:00:00 --partition=main-cpu'
+alias sacc='salloc -c 4 --mem=32G -t 12:00:00 --partition=main-cpu'
+alias sahuge='salloc -c 4 --mem=128G -t 12:00:00 --partition=long-cpu'
+alias sab='salloc -c 1 --mem=8G -t 12:00:00 --partition=main-cpu'
+# Max configurations for unkillable and main
+alias msa='salloc --gres=gpu:a100l:1 -c 6 --mem=32G -t 48:00:00 --partition=unkillable'
+alias mmsa='salloc --gres=gpu:a100l:2 -c 8 --mem=48G -t 48:00:00 --partition=main'
+alias ymsa='salloc --gres=gpu:a100l:1 -c 16 --mem=256G -t 48:00:00 --partition=lab-bengioy'
+alias ymsa2='salloc --gres=gpu:a100l:2 -c 16 --mem=256G -t 7-00:00:00 --partition=lab-bengioy'
+alias mhmsa='salloc --gres=gpu:a100l:1 -c 4 --mem=24G -t 48:00:00 --partition=main'
+alias mmmsa='salloc --gres=gpu:a100l:2 -c 8 --mem=48G -t 48:00:00 --partition=long'
+alias msahuge='salloc --gres=gpu:a100l:4 -c 64 --mem=1023G -t 7-00:00:00 --partition=lab-bengioy,long'
+alias msashort='salloc --gres=gpu:a100l:4 -c 24 --mem=127G -t 3:00:00 --partition=lab-bengioy,long'
+alias sa4='salloc --gres=gpu:4 -c 16 --mem=64G -t 48:00:00 --partition=long --exclude=cn-g[005-012,017-026]'
+alias sa2='salloc --gres=gpu:2 -c 8 --mem=48G -t 48:00:00 --partition=long --exclude=cn-g[005-012,017-026]'
+alias sa1='salloc --gres=gpu:1 -c 4 --mem=24G -t 48:00:00 --partition=long'
+alias ssa1='salloc --gres=gpu:1 -c 1 --mem=12G -t 48:00:00 --partition=long'
+
+function load_mc(){
+  module purge
+  module load miniconda/3
+  conda env list
+}
+
+function load_ts(){
+  cd $HOME/trainable_symmetry/
+  module purge
+  module load miniconda/3
+  conda activate ts_cpu
+}
+
+function load_op(){
+  cd $HOME/openproblems-comp/
+  module purge
+  module load miniconda/3
+  conda activate openproblems
+}
+
+function load_src(){
+  load_mc
+  cd $HOME/mila/2_causality/structure_recovery/
+  conda activate structure_recovery_cpu
+}
+
+function load_sr(){
+  load_mc
+  cd $HOME/mila/2_causality/structure_recovery/
+  conda activate structure_recovery
+}
+
+function load_ti(){
+  load_mc
+  cd $HOME/trajectory-inference
+  conda activate trajectory-inference
+}
+
+function load_se3(){
+  load_mc
+  cd $HOME/se3_diffusion/
+  conda activate $HOME/scratch/se3
+}
+
+function load_ai(){
+  cd $HOME/active_inference/runner/
+  micromamba activate $HOME/scratch/ai2-env
+  # eval "$(python src/train.py -sc install=bash)"
+}
+
+function load_dem(){
+  cd $HOME/DEM/
+  micromamba activate $HOME/scratch/dem-env
+  # eval "$(python src/train.py -sc install=bash)"
+}
+
+function load_tnet(){
+  load_mc
+  cd $HOME/TrajectoryNet/
+  micromamba activate $HOME/scratch/tnet10
+  # eval "$(python src/train.py -sc install=bash)"
+}
+function load_mdlm(){
+  load_mc
+  cd $HOME/mdlm/
+  micromamba activate $HOME/scratch/mdlm-env/
+  # eval "$(python src/train.py -sc install=bash)"
+}
+
+function load_ff(){
+  load_mc
+  cd $HOME/frame-flow/
+  micromamba activate $HOME/scratch/frameflow-env/
+  # eval "$(python src/train.py -sc install=bash)"
+}
+function runj(){
+  export JUPYTER_RUNTIME_DIR=${SLURM_TMPDIR}
+  ssh -f -N -R 35795:localhost:35795 ${SLURM_SUBMIT_HOST}
+  jupyter lab --no-browser --port=35795
+}
+function runj2(){
+  export JUPYTER_RUNTIME_DIR=${SLURM_TMPDIR}
+  ssh -f -N -R 35796:localhost:35796 ${SLURM_SUBMIT_HOST}
+  jupyter lab --no-browser --port=35796
+}
+PATH=$PATH:/home/mila/a/alexander.tong/dl_binder_design/include/silent_tools/
+HISTSIZE=20000
+HISTFILESIZE=20000
+

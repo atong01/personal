@@ -130,9 +130,9 @@ nnoremap <leader><space> :nohlsearch<CR>
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
 autocmd FileType python map <leader>b :ALEFix<CR>
-autocmd FileType *.txt setlocal textwidth=88
-autocmd FileType *.md setlocal textwidth=88
-autocmd FileType *.rst setlocal textwidth=88
+autocmd FileType *.txt setlocal textwidth=99
+autocmd FileType *.md setlocal textwidth=99
+autocmd FileType *.rst setlocal textwidth=99
 
 set ruler
 set cursorline
@@ -171,6 +171,7 @@ map ,- :s/^/--/<CR>
 map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>
 map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>
 map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>
+let @g = "Oimport code; code.interact(local=locals())^["
 
 function! Komment()
   if getline(".") =~ '\/\*'
