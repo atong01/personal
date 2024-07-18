@@ -5,4 +5,5 @@ dotfiles/ssh/*
 !dotfiles/ssh/config
 *.swp
 .DS_Store
+*.s??
 
